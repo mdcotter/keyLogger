@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Key Logger
+  p Just start typing! We are recording
+
+block scripts
+  script(src="/socket.io/socket.io.js")
+  script
+    window.onload = function(){
+      var socket = io.connect('/');
+      console.log('socket');
+      window.onkeypress = function keypress(key) {
+        console.log(key);
+        socket.emit('key', key.keyCode);
+      }
+    }
+
